@@ -4,6 +4,7 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.ChatScreen;
 import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -13,8 +14,6 @@ import sereneseasons.api.season.SeasonHelper;
 
 @Mod("seasoninfo")
 public class SeasonInfo {
-
-    private static final int BLACK_FONT_COLOR = 0;
 
     public SeasonInfo() {
         MinecraftForge.EVENT_BUS.register(this);
@@ -41,6 +40,8 @@ public class SeasonInfo {
     }
 
     private void drawText(String text, float x, float y) {
-        Minecraft.getInstance().font.draw(new MatrixStack(), text, x, y, BLACK_FONT_COLOR);
+        int fallbackBlackColor = 0;
+        int color = TextFormatting.WHITE.getColor() == null ? fallbackBlackColor : TextFormatting.WHITE.getColor();
+        Minecraft.getInstance().font.draw(new MatrixStack(), text, x, y, color);
     }
 }
