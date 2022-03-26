@@ -1,0 +1,16 @@
+modLoader="javafml"
+loaderVersion="[36,)"
+license="MIT"
+[[mods]]
+modId="seasoninfo"
+version="${file.jarVersion}"
+displayName="Season Info"
+description='''
+Shows infos about the current SereneSeasons season.
+'''
+[[dependencies.seasoninfo]]
+   modId="sereneseasons"
+   mandatory=true
+   versionRange="[1.16.5,)"
+   ordering="BEFORE"
+   side="CLIENT"

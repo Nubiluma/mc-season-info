@@ -1,4 +1,3 @@
-# IGI_SereneSeasons
-Minecraft Mod which adds tags for Serene Seasons to InGame Info XML.
+# Season Info
 
-https://minecraft.curseforge.com/projects/ingame-info-xml-serene-seasons
+Minecraft mod which adds season information about Seren Season for Minecarft 1.16.5.
