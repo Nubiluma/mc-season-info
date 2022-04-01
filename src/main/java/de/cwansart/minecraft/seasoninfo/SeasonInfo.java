@@ -1,12 +1,10 @@
 package de.cwansart.minecraft.seasoninfo;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
-import net.minecraft.client.MainWindow;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.ChatScreen;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -31,7 +29,7 @@ public class SeasonInfo {
             String seasonName = capitalize(clientSeasonState.getSeason());
             int day = clientSeasonState.getDay();
             int daysLeftUntilNextSeason = (clientSeasonState.getSeasonDuration() / 24_000) - day;
-            int screenHeight = Minecraft.getInstance().getWindow().getHeight();
+            int screenHeight = Minecraft.getInstance().getWindow().getGuiScaledHeight();
 
             drawText(seasonName + ", Day: " + day, 1, (screenHeight - 20));
             drawText(daysLeftUntilNextSeason + " days left until next season: ", 1, (screenHeight - 10));
