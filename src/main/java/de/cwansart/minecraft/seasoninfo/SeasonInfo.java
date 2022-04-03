@@ -18,6 +18,8 @@ public class SeasonInfo {
 
     private final MatrixStack matrixStack = new MatrixStack();
 
+    private long dayTime;
+
     public SeasonInfo() {
         MinecraftForge.EVENT_BUS.register(this);
     }
@@ -33,16 +35,26 @@ public class SeasonInfo {
 
             drawText(seasonName + ", Day: " + day, 1, (screenHeight - 20));
             drawText(daysLeftUntilNextSeason + " days left until next season: ", 1, (screenHeight - 10));
+
+            drawText("Time: " + getAdjustedTime(), 1, 0);
         }
     }
 
-//    @SubscribeEvent
-//    public void onTickEvent(TickEvent.WorldTickEvent worldTickEvent){
-//        long worldDayTime = (worldTickEvent.world.getDayTime() / 24_000);
-//        drawText("Day time: " + worldDayTime, 1, 40);
-//        long worldGameTime = worldTickEvent.world.getGameTime();
-//        drawText("Game time: " + worldGameTime, 1, 50);
-//    }
+    private String getAdjustedTime() {
+        // 18000 = 24:00
+        // 24000 = 6:00
+        long adjustedDayTime = dayTime + (24_000 - 18_000);
+        long hour = adjustedDayTime / 1000;
+        long minute = (adjustedDayTime % 1000) / 60;
+        return String.format("%02d:%02d", hour, minute);
+    }
+
+    @SubscribeEvent
+    public void onTickEvent(TickEvent.WorldTickEvent worldTickEvent) {
+        if (isInGame()) {
+            this.dayTime = worldTickEvent.world.getDayTime();
+        }
+    }
 
     private boolean isInGame() {
         Screen screen = Minecraft.getInstance().screen;
@@ -58,5 +70,4 @@ public class SeasonInfo {
     private String capitalize(Season season) {
         return season.name().charAt(0) + season.name().substring(1).toLowerCase();
     }
-
 }
