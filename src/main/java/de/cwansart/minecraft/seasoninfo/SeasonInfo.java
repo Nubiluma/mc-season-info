@@ -45,7 +45,7 @@ public class SeasonInfo {
         // 24000 = 6:00
         long adjustedDayTime = dayTime + (24_000 - 18_000);
         long hour = adjustedDayTime / 1000;
-        long minute = (adjustedDayTime % 1000) / 60;
+        long minute = (long) ((adjustedDayTime % 1000) / (1000d / 60d));
         return String.format("%02d:%02d", hour, minute);
     }
 
