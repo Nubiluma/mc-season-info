@@ -36,16 +36,15 @@ public class SeasonInfo {
             drawText(seasonName + ", Day: " + day, 1, (screenHeight - 20));
             drawText(daysLeftUntilNextSeason + " days left until next season: ", 1, (screenHeight - 10));
 
-            drawText("Time: " + getAdjustedTime(), 1, 0);
+            drawText("Time: " + getAdjustedTime(), 1, 1);
         }
     }
 
     private String getAdjustedTime() {
         // 18000 = 24:00
         // 24000 = 6:00
-        long adjustedDayTime = dayTime + (24_000 - 18_000);
-        long hour = adjustedDayTime / 1000;
-        long minute = (long) ((adjustedDayTime % 1000) / (1000d / 60d));
+        long hour = ((dayTime / 1000) + 6) % 24;
+        long minute = (long) ((dayTime % 1000) / (1000d / 60d));
         return String.format("%02d:%02d", hour, minute);
     }
 
